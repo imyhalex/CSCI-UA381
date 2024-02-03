@@ -977,11 +977,16 @@ printf '%i+%i=%i\n' 1 2 3  4 5 9
 | `[:alpha:]`    | All letters                                         |
 | `[:alnum:]`    | All letters and digits                              |
 
-#### Example
+## Examples
 
 ```bash
 echo "Welcome To Devhints" | tr '[:lower:]' '[:upper:]'
 WELCOME TO DEVHINTS
+```
+
+how to store this header into a new file and store it in one column that take out the ',' delimeter:
+```bash
+head -n1 filename | tr ',' '\n' > newfile
 ```
 
 ### Directory of script
