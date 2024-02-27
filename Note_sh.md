@@ -641,20 +641,20 @@ Note that `[[` is actually a command/program that returns either `0` (true) or `
 
 ### File conditions
 
-| Condition               | Description             |
-| ----------------------- | ----------------------- |
-| `[[ -e FILE ]]`         | Exists                  |
-| `[[ -r FILE ]]`         | Readable                |
-| `[[ -h FILE ]]`         | Symlink                 |
-| `[[ -d FILE ]]`         | Directory               |
-| `[[ -w FILE ]]`         | Writable                |
-| `[[ -s FILE ]]`         | Size is > 0 bytes       |
-| `[[ -f FILE ]]`         | File                    |
-| `[[ -x FILE ]]`         | Executable              |
-| ---                     | ---                     |
-| `[[ FILE1 -nt FILE2 ]]` | 1 is more recent than 2 |
-| `[[ FILE1 -ot FILE2 ]]` | 2 is more recent than 1 |
-| `[[ FILE1 -ef FILE2 ]]` | Same files              |
+| Condition               | Description                         |
+| ----------------------- | ------------------------------------|
+| `[[ -e FILE ]]`         | Exists                              |
+| `[[ -r FILE ]]`         | Readable                            |
+| `[[ -h FILE ]]`         | Symlink                             |
+| `[[ -d FILE ]]`         | Directory                           |
+| `[[ -w FILE ]]`         | Writable                            |
+| `[[ -s FILE ]]`         | Size is > 0 bytes                   |
+| `[[ -f FILE ]]`         | File: Check if it is a regular file |
+| `[[ -x FILE ]]`         | Executable                          |
+| ---                     | ---                                 |
+| `[[ FILE1 -nt FILE2 ]]` | 1 is more recent than 2             |
+| `[[ FILE1 -ot FILE2 ]]` | 2 is more recent than 1             |
+| `[[ FILE1 -ef FILE2 ]]` | Same files                          |
 
 ### Example
 
@@ -977,11 +977,16 @@ printf '%i+%i=%i\n' 1 2 3  4 5 9
 | `[:alpha:]`    | All letters                                         |
 | `[:alnum:]`    | All letters and digits                              |
 
-#### Example
+## Examples
 
 ```bash
 echo "Welcome To Devhints" | tr '[:lower:]' '[:upper:]'
 WELCOME TO DEVHINTS
+```
+
+how to store this header into a new file and store it in one column that take out the ',' delimeter:
+```bash
+head -n1 filename | tr ',' '\n' > newfile
 ```
 
 ### Directory of script
