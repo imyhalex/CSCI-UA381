@@ -876,7 +876,50 @@ print('\n'.join(names))
 ~./code.py | sort | uniq -c | sort -nr
 
 '''Give file as parameter'''
+# this pass filename in terminal
 import sys
-file_name = sys.stdin()
+file_name = sys.argv[0]
 f = open(file_name)
+lines=f.readlines()
+names = [line.split()[0] for line in lines[::2]]
+print('\n'.join(names))
+
+# after passing, we can write the bash shell command in terminal
+~ chat1.txt
+~ ./code.py | sort | uniq -c | sort -nr | head -n1
+# pass multiple input
+print(sys.argv[0])
+print(sys.argv[1])
+print(sys.argv[2])
+```
+
+## Binary Files
+```python
+class Person:
+    def __init__(self, n, a=0):
+        self.name=n
+        self.age=a
+    def intro(self):
+        return f"I am person, my name is: {self.name}, my age is: str({self.age})"
+
+'''pickle packages can input and extrat objects'''
+import pickle
+f = open('data.bin', 'wb')
+pickle.dump(p1,f)
+pickle.dump(p2,f)
+f.close()
+
+cat data.bin
+# ��6__main__��Person���)��}�(�name��james��age�Kub.��5__main__��Person���)��}�(�name��sara��age�Kub.
+
+f=open('data.bin','rb')
+v1=pickle.load(f)
+v2=pickle.load(f)
+f.close()
+
+v1.intro()
+# 'I am person, my name is: james, my age is: 20'
+
+v2.intro()
+# 'I am person, my name is: sara, my age is: 15'
 ```
