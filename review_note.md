@@ -648,3 +648,235 @@ def div(x,y):
         print('thank you...')
     return result
 ```
+
+## re
+```python
+txt='Hi, how are you today?'
+re.search('my', txt)!=None
+# False
+
+# . = any character, except a new line 
+print(re.search('a.','aa') !=None)
+print(re.search('a.','ab') !=None)
+print(re.search('a.','a1') !=None)
+print(re.search('a.','a') !=None)
+print(re.search('a.','a\n') !=None)
+# True
+# True
+# True
+# False
+# False
+
+
+# ? = match 0 or 1 repetitions
+print(re.search('ba?b','bb') !=None)
+print(re.search('ba?b','bab') !=None)
+print(re.search('ba?b','abab') !=None)
+print(re.search('ba?b','baab') !=None)
+# True
+# True
+# True
+# False
+
+# # = match 0 or more repetitions
+print(re.search('ba*b','bb') !=None)
+print(re.search('ba*b','bab') !=None)
+print(re.search('ba*b','baaaaaab') !=None)
+print(re.search('ba*b','baaaaaaaaagb') !=None)
+# True
+# True
+# True
+# False
+
+# + = match 1 or more
+print(re.search('ba+b','bb') !=None)
+print(re.search('ba+b','bab') !=None)
+print(re.search('ba+b','baaaab') !=None)
+print(re.search('ba+b','baaaaaab') !=None)
+# False
+# True
+# True
+# True
+
+# {} = match a range of number of times
+print(re.search('ba{1,3}b','bb') !=None)
+print(re.search('ba{1,3}b','bab') !=None)
+print(re.search('ba{1,3}b','baab') !=None)
+print(re.search('ba{1,3}b','baaab') !=None)
+print(re.search('ba{1,3}b','baaaab') !=None)
+# False
+# True
+# True
+# True
+# False
+
+# ^ = matches start of a string
+print(re.search('^a','abc') !=None)
+print(re.search('^a','abcde') !=None)
+print(re.search('^a',' abc') !=None)
+print(re.search('^a','bc') !=None)
+# True
+# True
+# False
+# False
+
+# $ = matches at the end of string
+print(re.search('a$','bca') !=None)
+print(re.search('a$','bca ') !=None)
+print(re.search('a$','bcb') !=None)
+# True
+# False
+# False
+
+print(re.search('^ab.ta$','aca') !=None)
+print(re.search('^a.a$','aca') !=None)
+print(re.search('^a.a$','a a') !=None)
+print(re.search('^a.a$','abbca') !=None)
+print(re.search('^a.?a$','aca') !=None)
+print(re.search('^a.*a$','aabcdeca') !=None)
+print(re.search('^a.{1,3}a$','aca') !=None)
+# True
+# True
+# False
+# True
+# True
+# True
+
+# [] are used to specify a set of chracters to match
+print(re.search('[123abc]','aca') !=None)
+print(re.search('[1-5a-d]','aca') !=None)
+# True
+# True
+
+# () are used to create a group of characters (together) to match
+print(re.search('(abc){2,3}','abc') !=None)
+print(re.search('(abc){2,3}','abcabc') !=None)
+print(re.search('(abc){2,3}','abcabcabc') !=None)
+print(re.search('(abc){2,3}','abcabcabcabc') !=None)
+print(re.search('^(abc){1,2}$',' abcabc') !=None)
+# False
+# True
+# True
+# True
+# False
+
+# | is used as logical operator
+print(re.search('abc|123','a') !=None)
+print(re.search('abc|123','123') !=None)
+print(re.search('abc|123','abc') !=None)
+# False
+# True
+# True
+
+# \ is used with special characters
+print(re.search('\?','Hi, how are you today?') !=None)
+# True
+
+# special characters
+# \d = matches any decimal digit [0-9]
+print(re.search('\d','my name is hasan, my age is 42 and my salary is 2000') !=None)
+re.findall('\S+','my name is hasan, my age is 42 and my salary is 2000') 
+# True
+# ['my',
+#  'name',
+#  'is',
+#  'hasan,',
+#  'my',
+#  'age',
+#  'is',
+#  '42',
+#  'and',
+#  'my',
+#  'salary',
+#  'is',
+#  '2000']
+
+# \d = any decimal digit
+# \D = any non-digit character
+# |w = any alphanumeric 
+# \W = any non-alphanumeric character
+# \s = any white space
+# \S = any non-whitespace character
+# \. = the character .
+# \t = tab
+# \n = new line
+
+# functions 
+# re.findall()
+# re.split()
+
+```
+
+## numpy
+```python
+'''Execise: how to find the person who participate most'''
+f=open('../shared/datafiles/chat.txt', 'r')
+lines=f.readlines()
+
+# first way
+names = [line.split()[0] for line in lines[::2]]
+freq = {}
+for n in names:
+    if n not in freq:
+        freq[n] = 1
+    else:
+        freq[n] += 1
+freq
+sorted(freq.items(), key=lambda x:x[1], reverse=True)
+# [('Emily', 122),
+#  ('John', 99),
+#  ('Michael', 98),
+#  ('William', 91),
+#  ('Jack', 90),
+#  ('Elizabeth', 89),
+#  ('Emma', 87),
+#  ('Mary', 86),
+#  ('Jayden', 83),
+#  ('Daniel', 77)]
+
+# second way
+import numpy as np
+names = [line.split()[0] for line in lines[::2]]
+np.unique(names, return_counts=True)
+# This retruns:
+# (array(['Daniel', 'Elizabeth', 'Emily', 'Emma', 'Jack', 'Jayden', 'John',
+#         'Mary', 'Michael', 'William'], dtype='<U9'),
+#  array([ 77,  89, 122,  87,  90,  83,  99,  86,  98,  91]))
+
+# Then we do 
+sorted(list(zip(np.unique(names, return_counts=True)[0],np.unique(names, return_counts=True)[1])), key=lambda r:r[1])[-1]
+# ('Emily', 122)
+
+# Third way (use python with bash shell)
+f=open('names.txt','w')
+for n in names:
+    f.write(n + '\n')
+f.close()
+
+# shell
+!cat names.txt | sort | uniq -c | sort -nr
+    # 122 Emily
+    #  99 John
+    #  98 Michael
+    #  91 William
+    #  90 Jack
+    #  89 Elizabeth
+    #  87 Emma
+    #  86 Mary
+    #  83 Jayden
+    #  77 Daniel
+
+# fourth way: create a new .py file and use the bash shell in terminal (e.g: code.py)
+f=open('../shared/datafiles/chat.txt', 'r')
+lines=f.readlines()
+names = [line.split()[0] for line in lines[::2]]
+print('\n'.join(names))
+
+# In terminal
+~./code.py | sort | uniq -c | sort -nr
+
+'''Give file as parameter'''
+import sys
+file_name = sys.stdin()
+f = open(file_name)
+```
