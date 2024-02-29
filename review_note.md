@@ -923,3 +923,72 @@ v1.intro()
 v2.intro()
 # 'I am person, my name is: sara, my age is: 15'
 ```
+
+## WebScraping
+```python
+import request
+requests.get('https://raw.githubusercontent.com/ha2285/files/main/fullnames.txt') # put in the url
+
+# get the content of the file
+res = requests.get('https://raw.githubusercontent.com/ha2285/files/main/fullnames.txt').text # put in the url
+res
+
+# how to reverse the first name and the last name within the 'res' and save it as file called 'names.txt'
+
+# first way
+new=[]
+for n in [name.split() for name in res.split('\n')]:
+    temp = n[0]
+    n[0]=n[1]
+    n[1]=temp
+    new.append(n)
+new 
+
+new_list = [' '.join(n) + '\n' for n in new]
+f=open('names.txt','w')
+for i in new_list:
+    f.write(i.lower())
+f.close()
+
+# second way
+list(map(lambda x:f"{x.split()[0]} {x.split()[1]}".lower(),res.split('\n')))
+
+# library deal with ugly text
+import requests
+from bs4 import BeautifulSoup
+content=requests.get('https://www.nyu.edu/').text
+soup=BeautifulSoup(content, feature='html.parser')
+
+# call soup
+soup
+# This will display the website structre in a orgainized way
+
+# only get the text
+soup.text
+
+soup.find_all
+
+# find all 'a' tag
+soup.find_all('a')
+
+# get all the text within the tag 'a'
+[l.text for l in soup.find_all('a')]
+
+# get all the links within the tag 'a'
+[l['href'] for l in soup.find_all('a')]
+
+# find all the news head under the bbc class -> suppose now url is: https://bbc.com/news
+[t.text for t in soup.find_all('h2',{'class':'sc-99f698d2-3 kTrQIN'})]
+
+datetime.today().day
+datetime.today().month
+
+datetime.today().__str__() # this is: '2024-02-29 16:37:12.706637'
+
+# we can get this info by day
+from datetime import datetime
+f=open(f"news_{datetime.today().__str__()}",'w')
+f.write('\n'.join(news))
+f.close()
+
+```
