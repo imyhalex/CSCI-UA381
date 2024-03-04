@@ -1,5 +1,99 @@
 # Bash
+```bash
+%%!
+# Your code here
+cd shared/datafiles/ecom
+cat */*.csv > ../../../combined_data.csv
 
+# cut -d',' -f3,4 combined_data.csv | sort -k2 -nr | head -n1
+# cat combined_data.txt | cut -d',' -f3 | sort | uniq -c | sort -nr | head -n1
+
+%%!
+# second way
+for folder in $(ls shared/datafiles/ecom);
+do
+    for file in $(ls "shared/datafiles/ecom/"$folder);
+    do
+        tail -n +2 "shared/datafiles/ecom/${folder}/${file}" >> combined_data.txt
+    done
+done
+!cat combined_data.txt | cut -d',' -f3 | sort | uniq -c | sort -nr | head -n1
+
+%%!
+cd shared/datafiles/ecom
+# cat */*.csv | cut -d',' -f1 | cut -d' ' -f1,2 | cut -d':' -f1 | sort -k1 | uniq -c
+cat combined_data.txt | cut -d',' -f1 | cut -d' ' -f2 | cut -d':' -f1 | sort | uniq -c | sort -nr | head -n1
+
+%%!
+# Your code here
+# current:/home/jovyan
+mkdir -p brandsData
+
+cd shared/datafiles/ecom
+
+for folder in $(ls);
+do
+    cd "$folder"
+    for file in $(ls);
+    do
+        brandName="$file"
+        cat "$file" >> "/home/jovyan/brandsData/${file}"
+    done
+    cd ..
+done
+
+%%!
+# Your code here
+cd shared/datafiles/ecom
+
+cat combined_data.txt | cut -d',' -f5 | sort | uniq -c | sort -nr | head -n5
+
+```
+
+```text
+Data is now organized in folders and files so that the folder is the category and the file contains data related to a brand
+
+i.e:
+category_1/brand_a.csv
+category_1/brand_b.csv
+category_1/brand_c.csv
+category_2/brand_a.csv
+category_2/brand_b.csv
+..................
+Reorganize the data so that folders represent brands and files contain dtata related to a category
+
+i.e: 
+brand_a/category_1.csv
+brand_a/category_2.csv
+brand_b/category_1.csv
+brand_b/category_1.csv
+brand_c/category_1.csv
+..................
+save all new data in a folder called newEcom
+```
+
+```bash
+%%!
+# Your code here
+newEcomDir="newEcom"
+
+mkdir -p "$newEcomDir"
+
+cd shared/datafiles/ecom
+
+for folder in $(ls);
+do
+    category="$folder"
+    cd "$folder"
+    for file in $(ls);
+    do
+        brandName=$(echo "$file" | cut -d'.' -f1)
+        mkdir -p "/home/jovyan/${newEcomDir}/${brandName}"
+        cat "$file" >> "/home/jovyan/${newEcomDir}/${brandName}/${category}.csv"
+    done
+    cd ..
+done
+```
 # Python
 
 ## String
