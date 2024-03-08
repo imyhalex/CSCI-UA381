@@ -1084,5 +1084,35 @@ from datetime import datetime
 f=open(f"news_{datetime.today().__str__()}",'w')
 f.write('\n'.join(news))
 f.close()
+```
 
+## Json
+```python
+import json
+import requests
+res=requests.get('https://api.zippopotam.us/us/90210')
+d=json.loads(res.text)
+
+d # can be a json format(dict) or list of json format
+# Output
+# {'post code': '90210',
+#  'country': 'United States',
+#  'country abbreviation': 'US',
+#  'places': [{'place name': 'Beverly Hills',
+#    'longitude': '-118.4065',
+#    'state': 'California',
+#    'state abbreviation': 'CA',
+#    'latitude': '34.0901'}]}
+
+d['places'][0]['state'] # California
+
+json.loads(res.text)
+# {'post code': '90210',
+#  'country': 'United States',
+#  'country abbreviation': 'US',
+#  'places': [{'place name': 'Beverly Hills',
+#    'longitude': '-118.4065',
+#    'state': 'California',
+#    'state abbreviation': 'CA',
+#    'latitude': '34.0901'}]}
 ```
