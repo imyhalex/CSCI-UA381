@@ -1116,3 +1116,84 @@ json.loads(res.text)
 #    'state abbreviation': 'CA',
 #    'latitude': '34.0901'}]}
 ```
+
+## numpy
+```python
+import numpy as np
+
+L=[1,2,3,4]
+a=np.array(L)
+
+print(L)
+# [1, 2, 3, 4]
+
+print(a)
+# [1 2 3 4]
+
+np.arange(5,20)
+# array([ 5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+
+# the start, end, steps can be float
+np.arange(5,20, .5)
+# array([ 5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ,  8.5,  9. ,  9.5, 10. ,
+#        10.5, 11. , 11.5, 12. , 12.5, 13. , 13.5, 14. , 14.5, 15. , 15.5,
+#        16. , 16.5, 17. , 17.5, 18. , 18.5, 19. , 19.5])
+
+np.linspace(10,20,20)
+# array([10.        , 10.52631579, 11.05263158, 11.57894737, 12.10526316,
+#        12.63157895, 13.15789474, 13.68421053, 14.21052632, 14.73684211,
+#        15.26315789, 15.78947368, 16.31578947, 16.84210526, 17.36842105,
+#        17.89473684, 18.42105263, 18.94736842, 19.47368421, 20.        ])
+
+# two ways to reshape the array
+a.shape=(5,2)
+a.reshape(5,2)
+
+# array only accept one type of data
+np.array([1,2,3,2.3,'hasan'])
+# this will transfer to string
+
+# subscripting and sclicing
+a
+# array(['1', '2', '3', '2.3', 'hasan'], dtype='<U32')
+
+a[0]
+# '1'
+
+a[3]
+# '2.3'
+
+a=np.arange(10).reshape(2,5)
+# a[row_id, col_id]
+# a[row_id][col_id]
+a[1,0]
+# 5
+
+a[1,2]
+# 7
+
+a[1][2] # work differently, but not always the same
+# 7
+
+a
+# array([[ 0,  1,  2,  3,  4],
+#        [ 5,  6,  7,  8,  9],
+#        [10, 11, 12, 13, 14],
+#        [15, 16, 17, 18, 19],
+#        [20, 21, 22, 23, 24]])
+
+a[1, :4]
+# array([5, 6, 7, 8])
+
+a[[0,-1],[0,-1]]
+# array([ 0, 24])
+
+a[:,2]
+# array([ 2,  7, 12, 17, 22])
+
+a[:][2]
+# array([10, 11, 12, 13, 14])
+
+# Arithemtirc
+
+```
