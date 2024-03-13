@@ -1194,6 +1194,79 @@ a[:,2]
 a[:][2]
 # array([10, 11, 12, 13, 14])
 
+b[0:,:2]
+# array([[ 0,  1],
+#        [ 5,  6],
+#        [10, 11],
+#        [15, 16],
+#        [20, 21]])
+
+# create numpy 10x10 array of zeros and frame it with ones
+a=np.zeros((5,5))
+a[[0,-1],:]=1
+a[:,[0,-1]]=1
+a
+# array([[1., 1., 1., 1., 1.],
+#        [1., 0., 0., 0., 1.],
+#        [1., 0., 0., 0., 1.],
+#        [1., 0., 0., 0., 1.],
+#        [1., 1., 1., 1., 1.]])
+
+a=np.ones((5,5))
+a[1:-1,1:-1]=0
+a
+# array([[1., 1., 1., 1., 1.],
+#        [1., 0., 0., 0., 1.],
+#        [1., 0., 0., 0., 1.],
+#        [1., 0., 0., 0., 1.],
+#        [1., 1., 1., 1., 1.]])
+
 # Arithemtirc
+# Logical Operators
+# &, |, ~
+c=np.array([True, True, False, True])
+d=np.array([True, False, True, True])
+c&d
+~c
+# array([False, False,  True, False])
+
+# important methods
+c.all()
+c.any()
+# True
+
+# important functions
+# np.mean, np.median, np.sum, np.std, np.argmax, np.argmin, np.argsort, np.unique(return_counts=True)
+
+'''Fancy Indexing'''
+a
+# array([0, 1, 2, 3, 4])
+
+a<3
+# array([ True,  True,  True, False, False])
+
+a[np.array([True, True, False, False, True])]
+# array([0, 1, 4])
+
+a[a<3]
+# array([0, 1, 2])
+
+a[a%2==0]
+# array([0, 2, 4])
+
+a[(a!=4)&(a!=0)]
+# array([1, 2, 3])
+
+x=np.arange(30).reshape(5,6)
+x
+# array([[ 0,  1,  2,  3,  4,  5],
+#        [ 6,  7,  8,  9, 10, 11],
+#        [12, 13, 14, 15, 16, 17],
+#        [18, 19, 20, 21, 22, 23],
+#        [24, 25, 26, 27, 28, 29]])
+
+sum(x[x%2==0])
+# 210
+
 
 ```
