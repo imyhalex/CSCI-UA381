@@ -1239,7 +1239,6 @@ df.iloc[170]
 # Name: 170, dtype: object
 
 '''value_count'''
-
 df['sex'].value_counts()
 # Male      157
 # Female     87
@@ -1850,7 +1849,7 @@ year_cyl.swaplevel().head()
 year_cyl.sort_index(level='model_year',ascending=False)
 # 		mpg	displacement	weight	acceleration	origin
 # model_year	cylinders					
-# 82	6	28.333333	225.000000	2931.666667	16.033333	1.000000
+# 82    6	28.333333	225.000000	2931.666667	16.033333	1.000000
 #     4	32.071429	118.571429	2402.321429	16.703571	1.714286
 # 81	8	26.600000	350.000000	3725.000000	19.000000	1.000000
 #     6	23.428571	184.000000	3093.571429	15.442857	1.714286
